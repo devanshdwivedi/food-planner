@@ -28,7 +28,6 @@ export default function FoodPlanner(): JSX.Element {
       }
       return mealItem;
     });
-    console.log('newMeals: ', newMeals);
     setMeals(newMeals);
   };
 
