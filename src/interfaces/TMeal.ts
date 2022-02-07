@@ -4,4 +4,5 @@ export interface TMeal {
     foodItems: TFoodItem[];
     id: string;
     addFoodItemCallback?: any;
+    removeMealCallback?: any;
 }

@@ -8,6 +8,7 @@ import { TFoodItem } from './interfaces/TFoodItem';
 import { customStyles } from './utils/ModalBaseStyles';
 
 export default function FoodPlanner(): JSX.Element {
+
   const [meals, setMeals] = useState<TMeal[]>([]);
   const [showMealCreator, setShowMealCreator] = useState<boolean>(false);
 
@@ -31,6 +32,16 @@ export default function FoodPlanner(): JSX.Element {
     setMeals(newMeals);
   };
 
+  const deleteMeal = (mealId: string) => {
+    const newMeals = meals.filter((mealItem: TMeal) => {
+      if (mealItem.id === mealId) {
+        return false;
+      }
+      return true;
+    });
+    setMeals(newMeals);
+  };
+
   useEffect(() => {
     if (meals && meals.length > 0) {
       console.log('meals: ', meals);
@@ -45,7 +56,7 @@ export default function FoodPlanner(): JSX.Element {
         meals && meals.map((mealItem: TMeal, index: number) => {
           const { name, foodItems, id } = mealItem;
           return (
-            <Meal addFoodItemCallback={addFoodItemCallback} id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
+            <Meal removeMealCallback={deleteMeal} addFoodItemCallback={addFoodItemCallback} id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
           );
         })
       }
