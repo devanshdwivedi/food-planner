@@ -15,5 +15,18 @@ export const getDefaultMeal = () => {
         name: 'Breakfast',
         foodItems: foodItems
     };
-    return [meal];
+    const foodItemLunch: TFoodItem = {
+        name: 'Poha',
+        calories: 120
+      };
+    const foodItemLunch2: TFoodItem = {
+        name: 'Juice',
+        calories: 40
+    };
+    const foodItemsLunch = [foodItemLunch, foodItemLunch2];
+    const meal2: TMeal = {
+        name: 'Lunch',
+        foodItems: foodItemsLunch
+    };
+    return [meal, meal2];
 };
