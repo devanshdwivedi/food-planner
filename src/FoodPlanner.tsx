@@ -42,6 +42,21 @@ export default function FoodPlanner(): JSX.Element {
     setMeals(newMeals);
   };
 
+  const deleteFoodItem = (mealId: string, foodItemId: string) => {
+    const newMeals = meals.map((mealItem: TMeal) => {
+      if (mealItem.id === mealId) {
+        mealItem.foodItems = mealItem.foodItems.filter((foodItem: TFoodItem) => {
+          if (foodItem.id === foodItemId) {
+            return false;
+          }
+          return true;
+        });
+      }
+      return mealItem;
+    });
+    setMeals(newMeals);
+  };
+
   useEffect(() => {
     if (meals && meals.length > 0) {
       console.log('meals: ', meals);
@@ -56,7 +71,7 @@ export default function FoodPlanner(): JSX.Element {
         meals && meals.map((mealItem: TMeal, index: number) => {
           const { name, foodItems, id } = mealItem;
           return (
-            <Meal removeMealCallback={deleteMeal} addFoodItemCallback={addFoodItemCallback} id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
+            <Meal deleteFoodItem={deleteFoodItem} removeMealCallback={deleteMeal} addFoodItemCallback={addFoodItemCallback} id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
           );
         })
       }

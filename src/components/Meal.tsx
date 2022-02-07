@@ -6,7 +6,7 @@ import { TMeal } from '../interfaces/TMeal';
 import FoodAdder from './FoodAdder';
 import FoodItemRow from './FoodItemRow';
 
-export default function Meal({ name, foodItems, addFoodItemCallback, removeMealCallback, id }: TMeal) {
+export default function Meal({ name, foodItems, addFoodItemCallback, removeMealCallback, id, deleteFoodItem }: TMeal) {
   const foodTotal = foodItems.reduce((acc: number, item: TFoodItem) => acc + item.calories, 0);
   const [showFoodAdd, setShowFoodAdd] = React.useState<boolean>(false);
   return (
@@ -21,7 +21,7 @@ export default function Meal({ name, foodItems, addFoodItemCallback, removeMealC
           <div className="meal-row-start">
             {
               foodItems && foodItems.map((foodItem: TFoodItem, index: number) => {
-                return <FoodItemRow id={foodItem.id} key={foodItem.name + index} name={foodItem.name} calories={foodItem.calories} />
+                return <FoodItemRow deleteFoodItem={deleteFoodItem} mealId={id} id={foodItem.id} key={foodItem.name + index} name={foodItem.name} calories={foodItem.calories} />
               })
             }
           </div>
