@@ -22,10 +22,13 @@ export default function FoodPlanner(): JSX.Element {
   };
 
   const addFoodItemCallback = (mealId: string, foodItem: TFoodItem) => {
-    const newMeals = [...meals];
-    newMeals.find((mealItem: TMeal) => {
-      mealItem.foodItems.push(foodItem);
+    const newMeals = meals.map((mealItem: TMeal) => {
+      if (mealItem.id === mealId) {
+        mealItem.foodItems.push(foodItem);
+      }
+      return mealItem;
     });
+    console.log('newMeals: ', newMeals);
     setMeals(newMeals);
   };
 

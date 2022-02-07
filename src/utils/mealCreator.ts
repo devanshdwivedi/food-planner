@@ -2,7 +2,7 @@ import { TFoodItem } from '../interfaces/TFoodItem';
 import { TMeal } from '../interfaces/TMeal';
 
 export const idGenerator = () => {
-    return Date.now() + ( (Math.random()*100000).toFixed());
+    return Date.now() + ((Math.random() * 100000).toFixed());
 };
 
 export const fillNewMeal = (mealName: string) => {
@@ -16,10 +16,10 @@ export const fillNewMeal = (mealName: string) => {
 
 export const getDefaultMeal = () => {
     const foodItem: TFoodItem = {
-        name: 'Juice',
+        name: 'Fruits',
         calories: 100,
         id: idGenerator()
-      };
+    };
     const foodItem2: TFoodItem = {
         name: 'Kale',
         calories: 80,
@@ -35,7 +35,7 @@ export const getDefaultMeal = () => {
         name: 'Poha',
         calories: 120,
         id: idGenerator()
-      };
+    };
     const foodItemLunch2: TFoodItem = {
         name: 'Juice',
         calories: 40,
