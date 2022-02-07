@@ -1,23 +1,12 @@
 import { TFoodItem } from '@app/interfaces/TFoodItem';
+import { customStyles } from '@app/utils/ModalBaseStyles';
 import React from 'react';
 import ReactModal from 'react-modal';
 import { TMeal } from '../interfaces/TMeal';
 import FoodAdder from './FoodAdder';
 import FoodItemRow from './FoodItemRow';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#c2e5c2'
-  },
-};
-
-export default function Meal({name, foodItems, addFoodItemCallback, id}: TMeal) {
+export default function Meal({ name, foodItems, addFoodItemCallback, id }: TMeal) {
   const foodTotal = foodItems.reduce((acc: number, item: TFoodItem) => acc + item.calories, 0);
   const [showFoodAdd, setShowFoodAdd] = React.useState<boolean>(false);
   return (
@@ -30,7 +19,7 @@ export default function Meal({name, foodItems, addFoodItemCallback, id}: TMeal) 
         <div className="meal-body">
           <div className="meal-row-start">
             {
-              foodItems && foodItems.map((foodItem: TFoodItem, index: number)=>{
+              foodItems && foodItems.map((foodItem: TFoodItem, index: number) => {
                 return <FoodItemRow id={foodItem.id} key={foodItem.name + index} name={foodItem.name} calories={foodItem.calories} />
               })
             }

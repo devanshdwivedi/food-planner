@@ -5,24 +5,13 @@ import Meal from './components/Meal';
 import ReactModal from 'react-modal';
 import MealCreator from './components/MealCreator';
 import { TFoodItem } from './interfaces/TFoodItem';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#c2e5c2'
-  },
-};
+import { customStyles } from './utils/ModalBaseStyles';
 
 export default function FoodPlanner(): JSX.Element {
   const [meals, setMeals] = useState<TMeal[]>([]);
   const [showMealCreator, setShowMealCreator] = useState<boolean>(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setMeals(getDefaultMeal());
   }, []);
 
@@ -34,14 +23,14 @@ export default function FoodPlanner(): JSX.Element {
 
   const addFoodItemCallback = (mealId: string, foodItem: TFoodItem) => {
     const newMeals = [...meals];
-    newMeals.find((mealItem: TMeal)=>{
+    newMeals.find((mealItem: TMeal) => {
       mealItem.foodItems.push(foodItem);
     });
     setMeals(newMeals);
   };
 
-  useEffect(()=>{
-    if(meals && meals.length > 0){ 
+  useEffect(() => {
+    if (meals && meals.length > 0) {
       console.log('meals: ', meals);
     }
   }, [meals]);
@@ -51,7 +40,7 @@ export default function FoodPlanner(): JSX.Element {
       <h1 className="app-header">Food Planner</h1>
       <button className="btn-primary" onClick={() => setShowMealCreator(true)}>Add meal</button>
       {
-        meals && meals.map((mealItem: TMeal, index: number)=>{
+        meals && meals.map((mealItem: TMeal, index: number) => {
           const { name, foodItems, id } = mealItem;
           return (
             <Meal addFoodItemCallback={addFoodItemCallback} id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
@@ -59,7 +48,7 @@ export default function FoodPlanner(): JSX.Element {
         })
       }
       <ReactModal appElement={document.getElementById('root') || undefined} onRequestClose={() => setShowMealCreator(false)} style={customStyles} isOpen={showMealCreator} >
-        <MealCreator successCallback={successCallback} modalCloseCallback={() => setShowMealCreator(false)}/>
+        <MealCreator successCallback={successCallback} modalCloseCallback={() => setShowMealCreator(false)} />
       </ReactModal>
     </>
   );
