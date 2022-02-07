@@ -4,6 +4,19 @@ import { getDefaultMeal, fillNewMeal } from './utils/mealCreator';
 import Meal from './components/Meal';
 import ReactModal from 'react-modal';
 import MealCreator from './components/MealCreator';
+import { TFoodItem } from './interfaces/TFoodItem';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#c2e5c2'
+  },
+};
 
 export default function FoodPlanner(): JSX.Element {
   const [meals, setMeals] = useState<TMeal[]>([]);
@@ -13,22 +26,18 @@ export default function FoodPlanner(): JSX.Element {
     setMeals(getDefaultMeal());
   }, []);
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: '#c2e5c2'
-    },
-  };
-
   const successCallback = (newMealName: string) => {
     const newMeal = fillNewMeal(newMealName);
     setShowMealCreator(false);
-    setMeals([...meals, newMeal]);
+    setMeals([newMeal, ...meals]);
+  };
+
+  const addFoodItemCallback = (mealId: string, foodItem: TFoodItem) => {
+    const newMeals = [...meals];
+    newMeals.find((mealItem: TMeal)=>{
+      mealItem.foodItems.push(foodItem);
+    });
+    setMeals(newMeals);
   };
 
   useEffect(()=>{
@@ -45,7 +54,7 @@ export default function FoodPlanner(): JSX.Element {
         meals && meals.map((mealItem: TMeal, index: number)=>{
           const { name, foodItems, id } = mealItem;
           return (
-            <Meal id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
+            <Meal addFoodItemCallback={addFoodItemCallback} id={id} key={index + '-meal-item'} name={name} foodItems={foodItems}></Meal>
           );
         })
       }

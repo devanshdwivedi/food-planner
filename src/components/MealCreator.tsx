@@ -6,7 +6,7 @@ interface MealCreatorProps {
     successCallback: any;
 }
 
-export default function MealCreator({modalCloseCallback, successCallback}: any) {
+export default function MealCreator({modalCloseCallback, successCallback}: MealCreatorProps) {
   const { register, handleSubmit, watch, formState: { errors , isSubmitting, isDirty, isValid} } = useForm({
       mode: 'onChange'
   });
