@@ -13,8 +13,8 @@ export default function Meal({name, foodItems}: TMeal) {
         <div className="meal-body">
           <div className="meal-row-start">
             {
-              foodItems && foodItems.map((foodItem: TFoodItem)=>{
-                return <FoodItemRow name={foodItem.name} calories={foodItem.calories} />
+              foodItems && foodItems.map((foodItem: TFoodItem, index: number)=>{
+                return <FoodItemRow id={foodItem.id} key={foodItem.name + index} name={foodItem.name} calories={foodItem.calories} />
               })
             }
           </div>
